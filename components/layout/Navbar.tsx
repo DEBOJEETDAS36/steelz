@@ -1,0 +1,41 @@
+'use client'
+
+import { useState } from 'react'
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <header className="fixed top-0 w-full bg-black border-b border-gray-800 z-50">
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 className="font-bold text-xl text-white">Steelz</h1>
+        <div className="hidden md:flex space-x-6 text-sm">
+          <a href="#hero" className="text-white hover:text-gray-300 transition">Home</a>
+          <a href="#about" className="text-white hover:text-gray-300 transition">About</a>
+          <a href="#services" className="text-white hover:text-gray-300 transition">Services</a>
+          <a href="#contact" className="text-white hover:text-gray-300 transition">Contact</a>
+        </div>
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-white hover:text-gray-300 focus:outline-none"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+      {isOpen && (
+        <div className="md:hidden bg-black border-t border-gray-800">
+          <div className="px-6 py-4 space-y-2">
+            <a href="#hero" className="block text-sm text-white hover:text-gray-300 transition" onClick={() => setIsOpen(false)}>Home</a>
+            <a href="#about" className="block text-sm text-white hover:text-gray-300 transition" onClick={() => setIsOpen(false)}>About</a>
+            <a href="#services" className="block text-sm text-white hover:text-gray-300 transition" onClick={() => setIsOpen(false)}>Services</a>
+            <a href="#contact" className="block text-sm text-white hover:text-gray-300 transition" onClick={() => setIsOpen(false)}>Contact</a>
+          </div>
+        </div>
+      )}
+    </header>
+  )
+}

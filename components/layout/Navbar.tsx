@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 w-full bg-black border-b border-gray-800 z-50">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="font-bold text-xl text-white">Steelz</h1>
+        <h1 className="font-bold text-xl text-white">AR-JAI</h1>
         <div className="hidden md:flex space-x-6 text-sm">
           <a href="#hero" className="text-white hover:text-gray-300 transition">Home</a>
           <a href="#about" className="text-white hover:text-gray-300 transition">About</a>

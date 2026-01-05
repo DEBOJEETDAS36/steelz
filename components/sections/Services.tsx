@@ -118,11 +118,9 @@ export default function Services() {
   return (
     <section id="services" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl font-bold mb-12">
-          Our Services
-        </h2>
+        <h2 className="text-4xl font-bold mb-12">Our Services</h2>
 
-        {/* ORIGINAL SERVICE CARDS – UNCHANGED */}
+        {/* SERVICE CARDS (UNCHANGED) */}
         <div className="grid md:grid-cols-3 gap-10">
           {services.map((service) => (
             <div
@@ -130,18 +128,14 @@ export default function Services() {
               className="border p-8 rounded-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-shadow duration-300 cursor-pointer"
               onClick={() => openModal(service)}
             >
-              <h3 className="font-semibold mb-3">
-                {service.name}
-              </h3>
-              <p className="text-gray-600 text-sm">
-                {service.description}
-              </p>
+              <h3 className="font-semibold mb-3">{service.name}</h3>
+              <p className="text-gray-600 text-sm">{service.description}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* GLASSMORPHIC MODAL */}
+      {/* MODAL */}
       {isModalOpen && selectedService && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md px-4"
@@ -149,12 +143,11 @@ export default function Services() {
         >
           <div
             className="relative max-w-lg w-full rounded-2xl overflow-hidden
-            bg-white/20 backdrop-blur-xl border border-white/30
-            shadow-2xl"
+            bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* IMAGE */}
-            <div className="h-48 w-full">
+            <div className="relative h-48 w-full">
               <img
                 src={selectedService.image}
                 alt={selectedService.name}
@@ -164,29 +157,32 @@ export default function Services() {
                 }}
                 className="h-full w-full object-cover"
               />
+
+              {/* PERFECTLY CENTERED CLOSE BUTTON */}
+              <button
+                onClick={closeModal}
+                className="absolute top-3 right-3 z-10
+                w-9 h-9 rounded-full
+                bg-black/50 hover:bg-black/70
+                flex items-center justify-center"
+              >
+                <span className="text-white text-2xl leading-none -translate-y-[1px]">
+                  &times;
+                </span>
+              </button>
             </div>
 
             {/* CONTENT */}
             <div className="p-8 text-white">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-bold">
-                  {selectedService.name}
-                </h3>
-                <button
-                  onClick={closeModal}
-                  className="text-white/70 hover:text-white text-2xl"
-                >
-                  &times;
-                </button>
-              </div>
+              <h3 className="text-2xl font-bold mb-4">
+                {selectedService.name}
+              </h3>
 
               <p className="text-white/80 leading-relaxed">
                 {selectedService.details}
               </p>
 
-              <button
-                className="mt-6 rounded-lg px-6 py-2 bg-blue-600 hover:bg-blue-700 transition text-sm font-medium"
-              >
+              <button className="mt-6 rounded-lg px-6 py-2 bg-blue-600 hover:bg-blue-700 transition text-sm font-medium">
                 Contact Us
               </button>
             </div>

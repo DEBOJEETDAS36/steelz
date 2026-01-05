@@ -10,10 +10,10 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="font-bold text-xl text-white">AR-JAI</h1>
         <div className="hidden md:flex space-x-6 text-sm">
-          <a href="#hero" className="text-white hover:text-gray-300 transition">Home</a>
-          <a href="#about" className="text-white hover:text-gray-300 transition">About</a>
-          <a href="#services" className="text-white hover:text-gray-300 transition">Services</a>
-          <a href="#contact" className="text-white hover:text-gray-300 transition">Contact</a>
+          <a href="#hero" className="text-white hover:text-gray-300 transition font-extrabold">Home</a>
+          <a href="#about" className="text-white hover:text-gray-300 transition font-extrabold">About</a>
+          <a href="#services" className="text-white hover:text-gray-300 transition font-extrabold">Services</a>
+          <a href="#contact" className="text-white hover:text-gray-300 transition font-extrabold">Contact</a>
         </div>
         <div className="md:hidden">
           <button

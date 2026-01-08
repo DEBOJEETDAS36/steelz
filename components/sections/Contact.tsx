@@ -67,43 +67,25 @@ export default function Contact() {
           {/* Contact Form */}
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="your@email.com"
-                  className="w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+              {/* Input Wrapper */}
+              {["name", "email"].map((field) => (
+                <div key={field} className="relative group">
+                  <span className="pointer-events-none absolute inset-0 rounded-lg bg-blue-400/40 opacity-0 blur-sm transition-opacity duration-300 group-focus-within:opacity-100" />
+                  <input
+                    type={field === "email" ? "email" : "text"}
+                    name={field}
+                    value={(formData as any)[field]}
+                    onChange={handleChange}
+                    required
+                    placeholder={field === "email" ? "your@email.com" : "Your Name"}
+                    className="relative z-10 w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 rounded-lg border border-gray-700 focus:outline-none"
+                  />
+                </div>
+              ))}
 
               {/* Message */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
-                </label>
+              <div className="relative group">
+                <span className="pointer-events-none absolute inset-0 rounded-lg bg-blue-400/40 opacity-0 blur-sm transition-opacity duration-300 group-focus-within:opacity-100" />
                 <textarea
                   name="message"
                   value={formData.message}
@@ -111,7 +93,7 @@ export default function Contact() {
                   required
                   rows={4}
                   placeholder="Your message..."
-                  className="w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 border border-gray-700 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="relative z-10 w-full px-4 py-3 bg-gray-900 text-white placeholder-gray-400 rounded-lg border border-gray-700 resize-none focus:outline-none"
                 />
               </div>
 

@@ -13,7 +13,7 @@ export default function Services() {
       details:
         "We provide state-of-the-art manufacturing processes for steel products, ensuring precision and quality in every piece we produce.",
       image:
-        "https://images.unsplash.com/photo-1581090700227-1e37b190418e"
+        "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80"
     },
     {
       name: "SUPPLY CHAIN MANAGEMENT",
@@ -81,7 +81,7 @@ export default function Services() {
                 alt={selectedService.name}
                 onError={(e) => {
                   e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1581090700227-1e37b190418e"
+                    "https://images.unsplash.com/photo-1581091870620-3a77e7bb0a98"
                 }}
                 className="h-full w-full object-cover"
               />

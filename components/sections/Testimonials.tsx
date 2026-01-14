@@ -30,7 +30,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="relative py-28 bg-black text-white overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
+      <div className="max-w-350 mx-auto px-6 lg:px-20">
         <h2 className="text-4xl md:text-5xl font-bold mb-16">
           What our clients say
         </h2>

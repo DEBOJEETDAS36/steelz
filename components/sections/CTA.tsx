@@ -6,10 +6,6 @@ import Image from "next/image"
 export default function CTA() {
   return (
     <section className="relative overflow-hidden bg-black text-white py-28">
-      
-      {/* Subtle grid / glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.08),_transparent_60%)]" />
-
       <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT CONTENT */}
@@ -24,7 +20,7 @@ export default function CTA() {
           </span>
 
           <h2 className="text-4xl md:text-5xl font-semibold leading-tight mb-6">
-            Build With <span className="text-white">Confidence</span>
+            Build With Confidence
           </h2>
 
           <p className="text-gray-400 max-w-xl mb-10 text-lg">
@@ -34,11 +30,11 @@ export default function CTA() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button className="group px-8 py-4 bg-white text-black rounded-lg font-medium transition-all duration-300 hover:bg-sky-100 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.4)]">
+            <button className="px-8 py-4 bg-white text-black rounded-lg font-medium transition-all duration-300 hover:bg-sky-100 hover:shadow-[0_0_0_1px_rgba(56,189,248,0.35)]">
               Get a Quote
             </button>
 
-            <button className="group px-8 py-4 border border-gray-700 rounded-lg font-medium transition-all duration-300 hover:border-sky-400 hover:text-sky-300">
+            <button className="px-8 py-4 border border-gray-700 rounded-lg font-medium transition-all duration-300 hover:border-sky-400 hover:text-sky-300">
               Talk to Sales
             </button>
           </div>
@@ -61,7 +57,8 @@ export default function CTA() {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="absolute -inset-6 bg-sky-400/10 blur-3xl rounded-full" />
+          {/* Blue glow ONLY around image */}
+          <div className="absolute -inset-6 bg-sky-400/15 blur-3xl rounded-full" />
 
           <Image
             src="/steel-factory.jpg"

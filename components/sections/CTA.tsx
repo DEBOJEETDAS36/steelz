@@ -61,12 +61,13 @@ export default function CTA() {
           <div className="absolute -inset-6 bg-sky-400/15 blur-3xl rounded-full" />
 
           <Image
-            src="/steel-factory.jpg"
-            alt="Steel manufacturing"
-            width={620}
-            height={420}
-            className="relative rounded-2xl border border-white/10 shadow-xl object-cover"
+          src="https://images.unsplash.com/photo-1581092919534-1c9c1a6b8f3c"
+          alt="Steel manufacturing"
+          width={620}
+          height={420}
+          className="relative rounded-2xl border border-white/10 shadow-xl object-cover"
           />
+
         </motion.div>
 
       </div>

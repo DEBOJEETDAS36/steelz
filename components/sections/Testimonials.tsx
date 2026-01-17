@@ -37,32 +37,67 @@ export default function Testimonials() {
   const trackRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<Animation | null>(null)
 
+  const CARD_WIDTH = 360
+  const GAP = 32
+  const STEP = CARD_WIDTH + GAP
+
   useEffect(() => {
     if (!trackRef.current) return
 
-    const track = trackRef.current
-    const width = track.scrollWidth / 2
+    startAnimation()
 
-    const animation = track.animate(
+    return () => animationRef.current?.cancel()
+  }, [])
+
+  const startAnimation = (offset = 0) => {
+    if (!trackRef.current) return
+
+    const track = trackRef.current
+    const totalWidth = track.scrollWidth / 2
+
+    animationRef.current?.cancel()
+
+    animationRef.current = track.animate(
       [
-        { transform: "translateX(0)" },
-        { transform: `translateX(-${width}px)` }
+        { transform: `translateX(-${offset}px)` },
+        { transform: `translateX(-${totalWidth}px)` }
       ],
       {
-        duration: 25000,
-        iterations: Infinity,
-        easing: "linear"
+        duration: (totalWidth - offset) * 20,
+        easing: "linear",
+        iterations: Infinity
       }
     )
+  }
 
-    animationRef.current = animation
+  const handleHoverEnd = () => {
+    if (!trackRef.current || !animationRef.current) return
 
-    return () => animation.cancel()
-  }, [])
+    animationRef.current.pause()
+
+    const track = trackRef.current
+    const matrix = new DOMMatrixReadOnly(
+      getComputedStyle(track).transform
+    )
+
+    const currentX = Math.abs(matrix.m41)
+    const snappedX = Math.round(currentX / STEP) * STEP
+
+    track.animate(
+      [
+        { transform: `translateX(-${currentX}px)` },
+        { transform: `translateX(-${snappedX}px)` }
+      ],
+      {
+        duration: 400,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards"
+      }
+    ).onfinish = () => startAnimation(snappedX)
+  }
 
   return (
     <section className="bg-black text-white py-20 md:py-28">
-      {/* SAME WIDTH AS CONTACT */}
       <div className="max-w-7xl mx-auto px-6 lg:px-20">
         <h2 className="text-3xl md:text-5xl font-bold mb-12 md:mb-16">
           What our clients say
@@ -72,7 +107,7 @@ export default function Testimonials() {
         <div
           className="relative overflow-hidden"
           onMouseEnter={() => animationRef.current?.pause()}
-          onMouseLeave={() => animationRef.current?.play()}
+          onMouseLeave={handleHoverEnd}
         >
           <div
             ref={trackRef}
@@ -81,7 +116,7 @@ export default function Testimonials() {
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
                 key={i}
-                className="w-[320px] lg:w-[360px] shrink-0"
+                className="w-[360px] shrink-0"
               >
                 <TestimonialCard t={t} />
               </div>
@@ -103,7 +138,7 @@ type Testimonial = {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full transition-transform duration-300 hover:scale-[1.02]">
+    <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)]">
       <div className="flex items-center gap-4 mb-6">
         <HumanAvatar seed={t.name} />
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
 
 /* ------------------ DATA ------------------ */
 
@@ -34,41 +34,55 @@ const testimonials = [
 /* ------------------ MAIN ------------------ */
 
 export default function Testimonials() {
-  const [index, setIndex] = useState(0)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const animationRef = useRef<Animation | null>(null)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex(prev => (prev + 1) % testimonials.length)
-    }, 3000)
-    return () => clearInterval(interval)
+    if (!trackRef.current) return
+
+    const track = trackRef.current
+    const width = track.scrollWidth / 2
+
+    const animation = track.animate(
+      [
+        { transform: "translateX(0)" },
+        { transform: `translateX(-${width}px)` }
+      ],
+      {
+        duration: 25000,
+        iterations: Infinity,
+        easing: "linear"
+      }
+    )
+
+    animationRef.current = animation
+
+    return () => animation.cancel()
   }, [])
 
   return (
-    <section className="relative py-20 md:py-28 bg-black text-white overflow-hidden">
+    <section className="bg-black text-white py-20 md:py-28">
+      {/* SAME WIDTH AS CONTACT */}
       <div className="max-w-7xl mx-auto px-6 lg:px-20">
         <h2 className="text-3xl md:text-5xl font-bold mb-12 md:mb-16">
           What our clients say
         </h2>
 
-        {/* MOBILE */}
-        <div className="md:hidden overflow-hidden">
+        {/* MASK */}
+        <div
+          className="relative overflow-hidden"
+          onMouseEnter={() => animationRef.current?.pause()}
+          onMouseLeave={() => animationRef.current?.play()}
+        >
           <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${index * 100}%)` }}
+            ref={trackRef}
+            className="flex gap-8 w-max"
           >
-            {testimonials.map((t, i) => (
-              <div key={i} className="w-full shrink-0 px-2">
-                <TestimonialCard t={t} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* DESKTOP */}
-        <div className="hidden md:block overflow-hidden">
-          <div className="flex w-[200%] gap-8 animate-testimonial hover:[animation-play-state:paused]">
             {[...testimonials, ...testimonials].map((t, i) => (
-              <div key={i} className="w-96 shrink-0">
+              <div
+                key={i}
+                className="w-[320px] lg:w-[360px] shrink-0"
+              >
                 <TestimonialCard t={t} />
               </div>
             ))}
@@ -89,7 +103,7 @@ type Testimonial = {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full">
+    <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 h-full transition-transform duration-300 hover:scale-[1.02]">
       <div className="flex items-center gap-4 mb-6">
         <HumanAvatar seed={t.name} />
 
@@ -105,7 +119,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   )
 }
 
-/* ------------------ HUMAN AVATAR (VARIANTS) ------------------ */
+/* ------------------ AVATAR ------------------ */
 
 function HumanAvatar({ seed }: { seed: string }) {
   const hash = seed
@@ -124,24 +138,16 @@ function HumanAvatar({ seed }: { seed: string }) {
   return (
     <div className="w-14 h-14 rounded-full overflow-hidden border border-white/20 bg-neutral-800">
       <svg viewBox="0 0 128 128" className="w-full h-full">
-        {/* Hair */}
         {isFemale ? (
-          <path
-            d="M36 44 C36 20 92 20 92 44 V52 H36 Z"
-            fill={hair}
-          />
+          <path d="M36 44 C36 20 92 20 92 44 V52 H36 Z" fill={hair} />
         ) : (
           <rect x="36" y="20" width="56" height="24" rx="12" fill={hair} />
         )}
 
-        {/* Head */}
         <circle cx="64" cy="52" r="26" fill={skin} />
-
-        {/* Eyes */}
         <circle cx="54" cy="52" r="3" fill="#000" />
         <circle cx="74" cy="52" r="3" fill="#000" />
 
-        {/* Mouth */}
         <path
           d="M54 64 Q64 70 74 64"
           stroke="#000"
@@ -149,11 +155,7 @@ function HumanAvatar({ seed }: { seed: string }) {
           fill="none"
         />
 
-        {/* Shirt */}
-        <path
-          d="M28 128 C28 92 100 92 100 128"
-          fill={shirt}
-        />
+        <path d="M28 128 C28 92 100 92 100 128" fill={shirt} />
       </svg>
     </div>
   )

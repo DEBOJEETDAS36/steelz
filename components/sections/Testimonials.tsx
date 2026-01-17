@@ -116,7 +116,7 @@ export default function Testimonials() {
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
                 key={i}
-                className="w-[360px] shrink-0"
+                className="w-90 shrink-0"
               >
                 <TestimonialCard t={t} />
               </div>

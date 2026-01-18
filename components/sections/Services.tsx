@@ -94,7 +94,7 @@ export default function Services() {
                 bg-black/50 hover:bg-black/70
                 flex items-center justify-center"
               >
-                <span className="text-white text-2xl leading-none -translate-y-[1px]">
+                <span className="text-white text-2xl leading-none -translate-y-px">
                   &times;
                 </span>
               </button>

@@ -61,7 +61,7 @@ export default function CTA() {
           <div className="absolute -inset-6 bg-sky-400/15 blur-3xl rounded-full" />
 
           <Image
-          src="https://images.unsplash.com/photo-1581092919534-1c9c1a6b8f3c"
+          src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80"
           alt="Steel manufacturing"
           width={620}
           height={420}

@@ -17,6 +17,7 @@ export default function Navbar() {
           <a href="#about" className="text-white hover:text-gray-300 transition font-extrabold">About</a>
           <a href="#services" className="text-white hover:text-gray-300 transition font-extrabold">Services</a>
           <a href="#contact" className="text-white hover:text-gray-300 transition font-extrabold">Contact</a>
+          <a href="#products" className="text-white hover:text-gray-300 transition font-extrabold">Products</a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -92,6 +93,13 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               Contact
+            </a>
+            <a
+              href="#products"
+              className="block text-sm text-white hover:text-gray-300 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Products
             </a>
           </div>
         </div>

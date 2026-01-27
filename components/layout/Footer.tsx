@@ -1,10 +1,3 @@
-// export default function Footer() {
-//   return (
-//     <footer className="border-t py-6 text-center text-sm text-gray-500">
-//       © {new Date().getFullYear()} Steelz. All rights reserved.
-//     </footer>
-//   )
-// }
 export default function Footer() {
   return (
     <footer className="border-t border-gray-800 bg-gray-950 py-8 text-center text-sm text-gray-400">
